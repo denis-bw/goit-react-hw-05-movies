@@ -21,7 +21,7 @@ const Movies = () => {
       return setMovies(dataMovie.data)
     })
 
-  },[queryValue])
+  },[queryValue,URL_MOVIE])
 
     // console.log(movie)
     // console.log(queryValue)

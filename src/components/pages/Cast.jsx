@@ -14,18 +14,20 @@ const Cast = () => {
     useEffect(() => {
         ApiServerRequest(URL_MOVIE_CAST).then((dataMovie) => {
         return setMovie(dataMovie.data)
-    });
-    },[])
+        });
+    },[URL_MOVIE_CAST])
 
-    
     console.log(movie)
+    
     return (
         <ul>
             {movie && movie.cast?.map(actor => {
+
                 let imgActor = `https://image.tmdb.org/t/p/w500${actor.profile_path}`
                 if(actor.profile_path === null){
                     imgActor = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
                 }
+               
                 return <li key={actor.id}>
                         <img src={imgActor} alt={actor.name} />
                         <p>{actor.name}</p>

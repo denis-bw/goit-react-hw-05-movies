@@ -15,7 +15,7 @@ const { movieId } = useParams();
         ApiServerRequest(URL_MOVIE_REVIEWS).then((dataMovie) => {
         return setReviews(dataMovie.data)
     });
-    },[])
+    },[URL_MOVIE_REVIEWS])
 
     
     console.log(reviews)

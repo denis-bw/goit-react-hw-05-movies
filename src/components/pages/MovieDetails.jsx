@@ -18,7 +18,7 @@ const MovieDetails = () => {
         setMoviePoster(`https://image.tmdb.org/t/p/w500${dataMovie.data.poster_path}`)
         return setMovie(dataMovie.data)
     });
-    },[])
+    },[URL_MOVIE])
     
     
     
