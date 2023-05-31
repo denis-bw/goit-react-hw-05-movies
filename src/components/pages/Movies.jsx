@@ -29,7 +29,7 @@ const Movies = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    
+    if(form.elements.query.value === '')return;
     setSearchParams({ query: form.elements.query.value });
     form.reset();
   }
