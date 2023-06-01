@@ -25,7 +25,6 @@ const Movies = () => {
 
     ApiServerRequest(URL_MOVIE).then((dataMovie) => {
       if (dataMovie.data.results.length === 0) {
-            setSearchParams();
             return toast.error("Nothing found ", {
           position: toast.POSITION.TOP_CENTER
         });
