@@ -1,0 +1,33 @@
+.List_Cast{
+    display: grid;
+    max-width: calc(100vw - 48px);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 16px;
+    padding: 0;
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Cast_Item{
+    width: 250px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.Cast_Image{
+    width: 250px;
+    height: 375px;
+}
+
+.Name_Actor_Text{
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+}

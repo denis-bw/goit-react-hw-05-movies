@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { ApiServerRequest } from '../../API/Api'
+import { ApiServerRequest } from '../../../API/Api'
+import css from './Reviews.module.css'
 
 const Reviews = () => {
 
@@ -19,16 +20,16 @@ const { movieId } = useParams();
 
     
     return (
-        <ul>
+        <ul className={css.Reviews_Container}>
             {reviews && reviews.results?.map(review => {
                 
                 return <li key={review.id}>
-                    <h2>{review.author }</h2>
-                        <p>{review.content }</p>
+                    <h2 className={css.Title_Reviews}>{review.author }</h2>
+                        <p className={css.Text_Reviews}>{review.content }</p>
                     </li>
                 
             })}
-            {reviews?.results.length === 0 && <p>We don`t have any reviews for this movie.</p>}
+            {reviews?.results.length === 0 && <p className={css.Text_Reviews}>We don`t have any reviews for this movie.</p>}
         </ul>
     );
 };

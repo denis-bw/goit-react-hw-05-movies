@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { ApiServerRequest } from '../../API/Api'
+import { ApiServerRequest } from '../../../API/Api'
 import { Link } from 'react-router-dom';
 import {  Suspense } from "react";
+import css from './Movies.module.css'
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Movies = () => {
+  
   const [movie, setMovies] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams();
   const queryValue = searchParams.get("query");
@@ -23,6 +25,7 @@ const Movies = () => {
 
     ApiServerRequest(URL_MOVIE).then((dataMovie) => {
       if (dataMovie.data.results.length === 0) {
+            setSearchParams();
             return toast.error("Nothing found ", {
           position: toast.POSITION.TOP_CENTER
         });
@@ -47,19 +50,19 @@ const Movies = () => {
 
    return (
      <Suspense fallback={<div>Loading...</div>}>
-       <form onSubmit={handleSubmit}>
-        <label >
-          <input
+       <form className={css.Form_Input_Find_Movie} onSubmit={handleSubmit}>
+        <label className={css.Labal_Find_Movie}>
+          <input className={css.Input_Find_Movie} 
             type="text" 
             name='query'/>
           
-          <button type="submyt">Serch</button>
+          <button className={css.Button_Find_Movie} type="submyt">Serch</button>
         </label>
        </form>
        
-       <ul>
+       <ul className={css.Container_List_Find}>
           {movie && movie.results.map(el => {
-            return <li key={el.id}><Link to={`${el.id}`} state={location}  >{el.title}</Link></li>
+            return <li key={el.id}><Link className={css.Find_Link} to={`${el.id}`} state={location}  >{el.title}</Link></li>
             })}
       </ul>
     </Suspense>

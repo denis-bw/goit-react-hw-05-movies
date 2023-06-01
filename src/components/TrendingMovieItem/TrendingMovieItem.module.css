@@ -1,0 +1,17 @@
+.Container_Tranding_Item{
+
+}
+
+.Tranding_Item{
+    text-decoration: none;
+    color: rgb(161, 32, 32);
+    font-family: inherit;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 24px;
+    font-style: normal
+}
+
+.Tranding_Item:hover{
+    color: black;
+}

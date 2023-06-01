@@ -1,7 +1,7 @@
-
+import css from './Home.module.css'
 import { useEffect, useState } from 'react';
-import {ApiServerRequest} from '../../API/Api'
-import TrendingMovieItem from '..//../components/TrendingMovieItem/TrendingMovieItem'
+import {ApiServerRequest} from '../../../API/Api'
+import TrendingMovieItem from '../../TrendingMovieItem/TrendingMovieItem'
 const Home = () => {
 
   const [trendingMovieList, settrendingMovieList] = useState(null)
@@ -22,15 +22,15 @@ const Home = () => {
   // console.log(trendingMovieList)
 
   return (
-    <>
+    <div className={css.Container_List}>
       
-      <div>Trending today</div>
-      <ul>
+      <p className={css.Tranding_Text}>Trending today</p>
+      <ul className={css.List_Tranding}>
         <TrendingMovieItem trendingMovieList={trendingMovieList} />
       </ul>
       
       
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,24 @@
+.Reviews_Container{
+    margin-left: 40px;
+    margin-right: 40px;
+    height: auto;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Title_Reviews{
+    font-family: inherit;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.Text_Reviews{
+    font-family: inherit;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.5;
+}
