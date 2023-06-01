@@ -18,7 +18,6 @@ const { movieId } = useParams();
     },[URL_MOVIE_REVIEWS])
 
     
-    console.log(reviews)
     return (
         <ul>
             {reviews && reviews.results?.map(review => {

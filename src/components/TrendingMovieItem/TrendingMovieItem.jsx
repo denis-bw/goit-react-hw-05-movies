@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-
-const TrendingMovieItem = ({trendingMovieList}) => {
-     
+import { useLocation } from "react-router-dom";
+  
+const TrendingMovieItem = ({ trendingMovieList }) => {
+     const location = useLocation()
     return trendingMovieList?.map(el => {
-        
-        return <li key={el.id}><Link to={`/movies/${el.id}`}>{el.title ?? el.original_name}</Link></li>
+        return <li key={el.id}><Link to={`/movies/${el.id}`} state={location}>{el.title ?? el.original_name}</Link></li>
     });
   
 };

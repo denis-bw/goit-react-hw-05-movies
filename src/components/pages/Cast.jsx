@@ -17,7 +17,7 @@ const Cast = () => {
         });
     },[URL_MOVIE_CAST])
 
-    console.log(movie)
+   
     
     return (
         <ul>
@@ -35,7 +35,7 @@ const Cast = () => {
                 
             })}
 
-            {movie?.cast.length === 0 && <p>no information about actors</p>}
+            {movie?.cast.length === 0 && <p>No information about actors</p>}
         </ul>
     );
 };

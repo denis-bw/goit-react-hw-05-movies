@@ -2,6 +2,8 @@ import { useLocation, useParams } from "react-router-dom";
 import {ApiServerRequest} from '../../API/Api'
 import { useEffect, useState } from 'react';
 import { Outlet, Link } from "react-router-dom"
+import { Suspense } from "react";
+
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -15,7 +17,7 @@ const MovieDetails = () => {
     const location = useLocation()
     useEffect(() => {
         ApiServerRequest(URL_MOVIE).then((dataMovie) => {
-        setMoviePoster(`https://image.tmdb.org/t/p/w500${dataMovie.data.poster_path}`)
+            setMoviePoster(`https://image.tmdb.org/t/p/w500${dataMovie.data.poster_path}`)
         return setMovie(dataMovie.data)
     });
     },[URL_MOVIE])
@@ -26,10 +28,9 @@ const MovieDetails = () => {
         setMoviePoster('https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg')
     }
 
-    console.log(location.state)
     return (
-      <>      
-          <Link to={location.state ?? '/'}>Back</Link>
+        <Suspense fallback={<div>Loading...</div>}>      
+          <Link to={location.state}>Back</Link>
           
           {movie && <div>
                         <img src={moviePoster} alt={movie.original_title} />
@@ -41,14 +42,13 @@ const MovieDetails = () => {
                         <p>{movie.genres?.map(el => el.name).join(' ')}</p>
             </div>}
             
-            <p>Additional information</p>
+            {movie && <p>Additional information</p> &&
             <ul>
                 <li><Link to={`/movies/${movieId}/cast`}>Cast</Link></li>
                 <li><Link to={`/movies/${movieId}/reviews`}>Reviews</Link></li>
-            </ul>
-            <Outlet />  
-         
-    </>
+            </ul>   }
+         <Outlet />
+    </Suspense>
   );
 };
 
