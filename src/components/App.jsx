@@ -1,14 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Home from './pages/Home/Home'
-import Layout from "./Layout/Layout";
-import Cast from "./pages/Cast/Cast";
-import Reviews from "./pages/Reviews/Reviews";
 import { ToastContainer } from 'react-toastify';
 import { lazy } from "react"
+import Layout from "./Layout/Layout";
 
-
-const Movies = lazy(() => import('./pages/Movies/Movies'))
-const MovieDetails = lazy(() => import('./pages/MovieDetails/MovieDetails'))
+const Home = lazy(() => import('../pages/Home/Home'))
+const Cast = lazy(() => import("../pages/Cast/Cast"))
+const Reviews = lazy(() => import('../pages/Reviews/Reviews'))
+const Movies = lazy(() => import('../pages/Movies/Movies'))
+const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'))
 
 const App = () => {
 
@@ -25,7 +24,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<Home />} />
         </Route>
-    </Routes> 
+      </Routes> 
      
     
     <ToastContainer autoClose={3000} />

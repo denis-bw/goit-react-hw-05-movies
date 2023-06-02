@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { ApiServerRequest } from '../../../API/Api'
+import { ApiServerRequest } from '../../API/Api'
+import { Suspense } from "react";
 import css from './Cast.module.css'
 
 const Cast = () => {
+
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
 
@@ -20,8 +22,9 @@ const Cast = () => {
    
     
     return (
-        <ul className={css.List_Cast}>
-            {movie && movie.cast?.map(actor => {
+        <Suspense fallback={<div>Loading...</div>}>
+            <ul className={css.List_Cast}>
+                {movie && movie.cast?.map(actor => {
 
                 let imgActor = `https://image.tmdb.org/t/p/w500${actor.profile_path}`
                 if(actor.profile_path === null){
@@ -31,12 +34,12 @@ const Cast = () => {
                 return <li className={css.Cast_Item} key={actor.id}>
                         <img className={css.Cast_Image} src={imgActor} alt={actor.name} />
                         <p className={css.Name_Actor_Text}>{actor.name}</p>
-                    </li>
-                
-            })}
+                    </li> 
+                })}
 
             {movie?.cast.length === 0 && <p lassName={css.Name_Actor_Text} >No information about actors</p>}
-        </ul>
+            </ul>
+        </Suspense>
     );
 };
 

@@ -1,8 +1,8 @@
-.Container_Tranding_Item{
+.Movieg_Item{
 
 }
 
-.Tranding_Item{
+.Movie_Item{
     text-decoration: none;
     color: rgb(161, 32, 32);
     font-family: inherit;
@@ -12,6 +12,6 @@
     font-style: normal
 }
 
-.Tranding_Item:hover{
+.Movie_Item:hover{
     color: black;
 }

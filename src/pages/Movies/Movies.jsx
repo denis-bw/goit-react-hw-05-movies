@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { ApiServerRequest } from '../../../API/Api'
+import { ApiServerRequest } from '../../API/Api'
 import { Link } from 'react-router-dom';
 import {  Suspense } from "react";
 import css from './Movies.module.css'
+import MovieList from '../../components/MovieList/MoviesList'
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,9 +47,8 @@ const Movies = () => {
     form.reset();
   }
 
-
    return (
-     <Suspense fallback={<div>Loading...</div>}>
+     <Suspense fallback={<div>Loading...</div>} >
        <form className={css.Form_Input_Find_Movie} onSubmit={handleSubmit}>
         <label className={css.Labal_Find_Movie}>
           <input className={css.Input_Find_Movie} 
@@ -60,11 +60,9 @@ const Movies = () => {
        </form>
        
        <ul className={css.Container_List_Find}>
-          {movie && movie.results.map(el => {
-            return <li key={el.id}><Link className={css.Find_Link} to={`${el.id}`} state={location}  >{el.title}</Link></li>
-            })}
+         {movie && <MovieList movieList={movie.results} locationPage={{ from: location }}></MovieList>}
       </ul>
-    </Suspense>
+    </Suspense >
     
   );
 };
