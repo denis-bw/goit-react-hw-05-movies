@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Outlet, Link } from "react-router-dom"
 import { Suspense } from "react";
 import css from './MovieDetails.module.css'
+import { Error } from "components/Error/Error";
+import { Loader } from "components/Loader/Loader";
 
 const MovieDetails = () => {
 
@@ -11,6 +13,8 @@ const MovieDetails = () => {
 
     const [movie, setMovie] = useState(null);
     const [moviePoster, setMoviePoster] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const location = useLocation()
     const PrevPage = useRef(location.state?.from ?? "/")
@@ -21,10 +25,14 @@ const MovieDetails = () => {
 
     
     useEffect(() => {
+        setIsLoading(true)
         ApiServerRequest(URL_MOVIE).then((dataMovie) => {
             setMoviePoster(`https://image.tmdb.org/t/p/w500${dataMovie.data.poster_path}`)
         return setMovie(dataMovie.data)
-    });
+    }).catch(error => {
+      setError(true)
+      throw new Error(error);
+    }).finally(setIsLoading(false));
     },[URL_MOVIE])
     
 
@@ -33,9 +41,12 @@ const MovieDetails = () => {
     }
     
     return (    
-        <Suspense fallback={<div>Loading...</div>}>      
+        <Suspense fallback={<Loader />}>
           <div className={css.Button_Back_Container}><Link className={css.Button_Back} to={PrevPage.current}>Back</Link></div>
-          
+
+            {isLoading && <Loader />}
+            {error && <Error />}
+
             {movie && <div className={css.Container_Movie_Content}>
                 <img className={css.Movie_Poster} src={moviePoster} alt={movie.original_title} />
                 <div className={css.Information_Movie_Container}>

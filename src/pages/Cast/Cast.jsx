@@ -1,28 +1,43 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { ApiServerRequest } from '../../API/Api'
+import { Loader } from "components/Loader/Loader";
+import { Error } from "components/Error/Error";
 import { Suspense } from "react";
 import css from './Cast.module.css'
+
+
 
 const Cast = () => {
 
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const API_KEY = '78fa60d71c65cdb8379688d13cf3e503';
     const URL_MOVIE_CAST = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`;
 
 
     useEffect(() => {
+        setIsLoading(true)
+
         ApiServerRequest(URL_MOVIE_CAST).then((dataMovie) => {
-        return setMovie(dataMovie.data)
-        });
+            return setMovie(dataMovie.data)
+        }).catch(error => {
+            setError(true)
+          throw new Error(error);
+        }).finally(setIsLoading(false));
     },[URL_MOVIE_CAST])
 
    
     
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
+
+            {isLoading && <Loader />}
+            {error && <Error />}
+
             <ul className={css.List_Cast}>
                 {movie && movie.cast?.map(actor => {
 

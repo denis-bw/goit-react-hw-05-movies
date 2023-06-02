@@ -4,6 +4,8 @@ import { ApiServerRequest } from '../../API/Api'
 import { Suspense } from "react";
 import css from './Movies.module.css'
 import MovieList from '../../components/MovieList/MoviesList'
+import { Loader } from "components/Loader/Loader";
+import { Error } from "components/Error/Error";
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const Movies = () => {
   
   const [movie, setMovies] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams();
   const queryValue = searchParams.get("query");
   const API_KEY = '78fa60d71c65cdb8379688d13cf3e503';
@@ -19,19 +23,26 @@ const Movies = () => {
   const location = useLocation()
 
   useEffect(() => {
+
       if (queryValue === null) {
         return;
-      }
-
+    }
+    
+    setIsLoading(true)
+    
     ApiServerRequest(URL_MOVIE).then((dataMovie) => {
       if (dataMovie.data.results.length === 0) {
             return toast.error("Nothing found ", {
           position: toast.POSITION.TOP_CENTER
         });
       }
-
       return setMovies(dataMovie.data)
-    })
+    }).catch(error => {
+      setError(true)
+      throw new Error(error);
+    }).finally(
+       setIsLoading(false)
+    )
 
   },[queryValue,URL_MOVIE])
 
@@ -47,7 +58,7 @@ const Movies = () => {
   }
 
    return (
-     <Suspense fallback={<div>Loading...</div>} >
+     <Suspense fallback={<Loader />} >
        <form className={css.Form_Input_Find_Movie} onSubmit={handleSubmit}>
         <label className={css.Labal_Find_Movie}>
           <input className={css.Input_Find_Movie} 
@@ -58,6 +69,9 @@ const Movies = () => {
         </label>
        </form>
        
+      {isLoading && <Loader />}
+      {error && <Error />}
+
        <ul className={css.Container_List_Find}>
          {movie && <MovieList movieList={movie.results} locationPage={{ from: location }}></MovieList>}
       </ul>
