@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { ApiServerRequest } from '../../API/Api'
-import { Link } from 'react-router-dom';
-import {  Suspense } from "react";
+import { Suspense } from "react";
 import css from './Movies.module.css'
 import MovieList from '../../components/MovieList/MoviesList'
 

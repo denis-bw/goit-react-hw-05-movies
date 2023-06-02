@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
 import css from './MoviesList.module.css' 
  
 const TrendingMovieItem = ({ movieList, locationPage }) => {
