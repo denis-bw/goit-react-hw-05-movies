@@ -17,8 +17,8 @@ const MovieDetails = () => {
     const [error, setError] = useState(false)
 
     const location = useLocation()
-    const PrevPage = useRef(location.state?.from ?? "/")
-
+    const PrevPage = useRef(location.state?.form ?? '/')
+    
     const API_KEY = '78fa60d71c65cdb8379688d13cf3e503';
     const URL_MOVIE = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
 
@@ -51,7 +51,7 @@ const MovieDetails = () => {
                 <img className={css.Movie_Poster} src={moviePoster} alt={movie.original_title} />
                 <div className={css.Information_Movie_Container}>
                     <h1 className={css.Title_Movie}>{movie.original_title} ({movie.release_date.slice(0, 4)})</h1>
-                    <p className={css.Text_Movie}>User Score: {Math.round(movie.popularity)}%</p>
+                    <p className={css.Text_Movie}>User Score: {String(movie.popularity).slice(0, 2)}%</p>
                     <h2 className={css.Text_Movie_Title}>Overviwe</h2>
                     <p className={css.Text_Movie}>{movie.overview}</p>
                     <h2 className={css.Text_Movie_Title}>Genres</h2>

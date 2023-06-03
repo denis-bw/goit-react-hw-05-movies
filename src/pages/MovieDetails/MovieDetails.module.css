@@ -29,19 +29,20 @@
     margin-bottom: 20px;
 }
 
-.Movie_Poster{
-    width: 400px;
-    height: 650px;
-}
 
 @media screen and (min-width: 280px) {
     .Movie_Poster{
-        width: 200px;
+        width: 220px;
         height: 350px;
     }
 }
 
 @media screen and (max-width: 765px) {
+   
+        .Movie_Poster {
+            width: 270px;
+            height: 420px;
+        }
     
 
     .Container_Movie_Content {

@@ -73,7 +73,7 @@ const Movies = () => {
       {error && <Error />}
 
        <ul className={css.Container_List_Find}>
-         {movie && <MovieList movieList={movie.results} locationPage={{ from: location }}></MovieList>}
+         {movie && <MovieList movieList={movie.results} state={location}></MovieList>}
       </ul>
     </Suspense >
     

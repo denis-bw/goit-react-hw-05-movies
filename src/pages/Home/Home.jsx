@@ -35,7 +35,7 @@ const Home = () => {
       <div className={css.Container_List}>
         <p className={css.Tranding_Text}>Trending today</p>
         <ul className={css.List_Tranding}>
-          {trendingMovieList && <MoviesList movieList={trendingMovieList} locationPage={location}/>}
+          {trendingMovieList && <MoviesList movieList={trendingMovieList} state={ location }/>}
         </ul>
       </div>
       
